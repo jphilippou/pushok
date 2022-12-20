@@ -23,6 +23,7 @@ class Alert implements \JsonSerializable
     const ALERT_TITLE_KEY = 'title';
     const ALERT_SUBTITLE = 'subtitle';
     const ALERT_BODY_KEY = 'body';
+    const ALERT_USER_INFO_KEY = 'userInfo';
     const ALERT_TITLE_LOC_KEY = 'title-loc-key';
     const ALERT_TITLE_LOC_ARGS_KEY = 'title-loc-args';
     const ALERT_ACTION_LOC_KEY = 'action-loc-key';
@@ -85,6 +86,29 @@ class Alert implements \JsonSerializable
      * @var string[]
      */
     private $locArgs;
+
+    /**
+     * Set Alert userInfo.
+     *
+     * @param string $value
+     * @return Alert
+     */
+    public function setUserInfo(string $value): Alert
+    {
+        $this->userInfo = $value;
+
+        return $this;
+    }
+
+    /**
+     * Get Alert userInfo.
+     *
+     * @return string
+     */
+    public function getUserInfo()
+    {
+        return $this->userInfo;
+    }
 
     /**
      * The filename of an image file in the app bundle, with or without the filename extension.
@@ -359,6 +383,10 @@ class Alert implements \JsonSerializable
 
         if (is_array($this->locArgs)) {
             $alert[self::ALERT_LOC_ARGS_KEY] = $this->locArgs;
+        }
+
+        if (is_string($this->userInfo)) {
+            $alert[self::ALERT_USER_INFO_KEY] = $this->userInfo;
         }
 
         if (is_string($this->launchImage)) {
